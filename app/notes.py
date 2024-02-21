@@ -5,7 +5,7 @@ from . import db
 
 notes_bp = Blueprint('notes', __name__)
 
-@notes_bp.route('/create', methods=['POST'])
+@notes_bp.route('/notes/create', methods=['POST'])
 @jwt_required()
 def create_note():
     current_user_id = get_jwt_identity()
@@ -23,7 +23,7 @@ def create_note():
 
     return jsonify({'message': 'Note created successfully'}), 201
 
-@notes_bp.route('/<int:id>', methods=['GET'])
+@notes_bp.route('/notes/<int:id>', methods=['GET'])
 @jwt_required()
 def get_note(id):
     current_user_id = get_jwt_identity()
@@ -35,7 +35,7 @@ def get_note(id):
 
     return jsonify({'id': note.id, 'title': note.title, 'text': note.text, 'user_id': note.user_id})
 
-@notes_bp.route('/share', methods=['POST'])
+@notes_bp.route('/notes/share', methods=['POST'])
 @jwt_required()
 def share_note():
     current_user_id = get_jwt_identity()
@@ -58,7 +58,7 @@ def share_note():
 
     return jsonify({'message': 'Note shared successfully'}), 200
 
-@notes_bp.route('/<int:id>', methods=['PUT'])
+@notes_bp.route('/notes/<int:id>', methods=['PUT'])
 @jwt_required()
 def update_note(id):
     current_user_id = get_jwt_identity()
@@ -81,7 +81,7 @@ def update_note(id):
 
     return jsonify({'message': 'Note updated successfully'}), 200
 
-@notes_bp.route('/version-history/<int:id>', methods=['GET'])
+@notes_bp.route('/notes/version-history/<int:id>', methods=['GET'])
 @jwt_required()
 def get_version_history(id):
     current_user_id = get_jwt_identity()
