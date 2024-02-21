@@ -37,7 +37,8 @@ This is a simple Notes api built using Python,Flask.
   ```
 
 ### steps to run the flask app
-    ```
+
+   ```
       flask run.py or flask run
     ```
 # Note :  
