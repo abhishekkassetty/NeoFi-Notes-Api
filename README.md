@@ -1,6 +1,14 @@
 # NeoFi-Notes-api
 
 
+This is a simple Notes api built using Python,Flask.
+
+## Features
+
+- User Authentication: Users can register, log in.
+- Notes Posts: Users can create, edit, share, view, version-history their blog posts.
+- Database: Data is stored in a SQLite database using Flask-SQLAlchemy.
+
 ## Steps to Install
 - Install the required dependencies : 
     ```
