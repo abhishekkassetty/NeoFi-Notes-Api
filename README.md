@@ -9,6 +9,12 @@ This is a simple Notes api built using Python,Flask.
 - Notes Posts: Users can create, edit, share, view, version-history their blog posts.
 - Database: Data is stored in a SQLite database using Flask-SQLAlchemy.
 
+## clone the repositroy to your device
+- Clone the repo :
+      ```
+    git clone https://github.com/abhishekkassetty/NeoFi-Notes-Api.git
+    ```
+
 ## Steps to Install
 - Install the required dependencies : 
     ```
