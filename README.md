@@ -11,9 +11,9 @@ This is a simple Notes api built using Python,Flask.
 
 ## clone the repositroy to your device
 - Clone the repo :
-      ```
+  ```
     git clone https://github.com/abhishekkassetty/NeoFi-Notes-Api.git
-    ```
+  ```
 
 ## Steps to Install
 - Install the required dependencies : 
