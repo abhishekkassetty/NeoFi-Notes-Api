@@ -62,7 +62,7 @@ class FlaskAppTestCase(unittest.TestCase):
         self.client.post('/signup', json={"username": "test_user", "email": "test@example.com", "password": "password"})
         login_response = self.client.post('/login', json={"username_or_email": "test_user", "password": "password"})
         access_token = login_response.json['access_token']
-        response = self.client.post('/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.post('/notes/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
         
         self.assertEqual(response.status_code, 201)
         self.assertIn(b"Note created successfully", response.data)
@@ -72,10 +72,10 @@ class FlaskAppTestCase(unittest.TestCase):
         self.client.post('/signup', json={"username": "test_user", "email": "test@example.com", "password": "password"})
         login_response = self.client.post('/login', json={"username_or_email": "test_user", "password": "password"})
         access_token = login_response.json['access_token']
-        response = self.client.post('/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.post('/notes/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
         
         note_id = 1  # Make sure this ID exists in your test database
-        response = self.client.get(f'/{note_id}', headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.get(f'/notes/{note_id}', headers={'Authorization': f'Bearer {access_token}'})
         self.assertEqual(response.status_code, 200)
         self.assertIn('id', response.json)
         self.assertIn('title', response.json)
@@ -86,11 +86,11 @@ class FlaskAppTestCase(unittest.TestCase):
         self.client.post('/signup', json={"username": "test_user", "email": "test@example.com", "password": "password"})
         login_response = self.client.post('/login', json={"username_or_email": "test_user", "password": "password"})
         access_token = login_response.json['access_token']
-        response = self.client.post('/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.post('/notes/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
         
         # Test sharing a note with other users
         data = {'note_id': 1, 'users': [2, 3]}  # Note ID and user IDs should exist in your test database
-        response = self.client.post('/share', json=data,headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.post('/notes/share', json=data,headers={'Authorization': f'Bearer {access_token}'})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['message'], 'Note shared successfully')
 
@@ -98,12 +98,12 @@ class FlaskAppTestCase(unittest.TestCase):
         self.client.post('/signup', json={"username": "test_user", "email": "test@example.com", "password": "password"})
         login_response = self.client.post('/login', json={"username_or_email": "test_user", "password": "password"})
         access_token = login_response.json['access_token']
-        response = self.client.post('/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.post('/notes/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
         
         # Test updating a note
         note_id = 1  # Note ID should exist in your test database
         data = {'new_text': 'Updated text for the note'}
-        response = self.client.put(f'/{note_id}', json=data,headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.put(f'/notes/{note_id}', json=data,headers={'Authorization': f'Bearer {access_token}'})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['message'], 'Note updated successfully')
 
@@ -111,13 +111,13 @@ class FlaskAppTestCase(unittest.TestCase):
         self.client.post('/signup', json={"username": "test_user", "email": "test@example.com", "password": "password"})
         login_response = self.client.post('/login', json={"username_or_email": "test_user", "password": "password"})
         access_token = login_response.json['access_token']
-        response = self.client.post('/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.post('/notes/create', json={"title": "Test note content","text":"testing the api!"}, headers={'Authorization': f'Bearer {access_token}'})
         note_id = 1  # Note ID should exist in your test database
         data = {'new_text': 'Updated text for the note'}
-        response = self.client.put(f'/{note_id}', json=data,headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.put(f'/notes/{note_id}', json=data,headers={'Authorization': f'Bearer {access_token}'})
         # Test retrieving the version history of a note
         note_id = 1  # Note ID should exist in your test database
-        response = self.client.get(f'/version-history/{note_id}', headers={'Authorization': f'Bearer {access_token}'})
+        response = self.client.get(f'/notes/version-history/{note_id}', headers={'Authorization': f'Bearer {access_token}'})
         self.assertEqual(response.status_code, 200)
         self.assertIn('note_id', response.json)
         self.assertIn('title', response.json)
