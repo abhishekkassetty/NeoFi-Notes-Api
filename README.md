@@ -6,7 +6,7 @@ This is a simple Notes api built using Python,Flask.
 ## Features
 
 - User Authentication: Users can register, log in.
-- Notes Posts: Users can create, edit, share, view, version-history their blog posts.
+- Notes Posts: Users can create, edit, share, view, version-history their Notes.
 - Database: Data is stored in a SQLite database using Flask-SQLAlchemy.
 
 ## clone the repositroy to your device
